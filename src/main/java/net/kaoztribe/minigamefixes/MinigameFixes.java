@@ -1,11 +1,8 @@
 package net.kaoztribe.minigamefixes;
 
 import net.kaoztribe.minigamefixes.bedwars.BedWars;
-import org.bukkit.event.player.PlayerLoginEvent;
+import net.kaoztribe.minigamefixes.villagedefense.VillageDefense;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class MinigameFixes extends JavaPlugin {
 
@@ -17,6 +14,8 @@ public class MinigameFixes extends JavaPlugin {
 
     // Bedwars
     new BedWars(this);
+    // Village DEfense
+    new VillageDefense(this);
   }
   
 }

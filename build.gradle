@@ -8,6 +8,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url 'https://repo.screamingsandals.org/' } // Bedwars
+    maven { url 'https://maven.plajer.xyz/minecraft' } // Village Defense
 }
 
 group = project.property("group")
@@ -17,9 +18,12 @@ sourceCompatibility = project.property("sourceversion")
 println("### Target is ${project.name}-${version}.jar")
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    // SPigot API
     implementation group: 'org.spigotmc', name: 'spigot-api', version: project.property("apiversion")
+    // plugins
     implementation group: 'org.screamingsandals.bedwars', name: 'BedWars-API', version: '0.2.8-SNAPSHOT'
+    implementation group: 'pl.plajer', name: 'villagedefense', version: '4.2.2' // newest version in Repo atm
+    // annotation handling
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
     compileOnly group: 'org.jetbrains', name: 'annotations', version: '16.0.2'
