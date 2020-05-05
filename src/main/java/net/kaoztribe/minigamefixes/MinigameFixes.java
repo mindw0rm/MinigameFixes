@@ -17,10 +17,6 @@ public class MinigameFixes extends JavaPlugin {
 
     // Bedwars
     new BedWars(this);
-
-    int[] newarray = new int[66];
-
-    Arrays.stream(newarray).mapToObj(i -> "" + i).collect(Collectors.joining(", "));
   }
   
 }
