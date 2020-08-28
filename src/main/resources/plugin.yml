@@ -3,7 +3,7 @@ version: @version@-@apiversion@
 description: 'fix some issues with minigames'
 authors: [mindw0rm]
 website: https://github.com/mindw0rm/MinigameFixes
-api-version: 1.15
+api-version: 1.16
 depend: [WorldGuard]
 softdepend: [VillageDefense,Parkour]
 main: net.kaoztribe.minigamefixes.MinigameFixes
