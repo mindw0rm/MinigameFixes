@@ -7,8 +7,9 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url 'https://repo.screamingsandals.org/' } // Bedwars
     maven { url 'https://maven.plajer.xyz/minecraft' } // Village Defense
+    maven { url 'https://dl.bintray.com/a5h73y/repo/' } // Parkour
+    maven { url "https://maven.enginehub.org/repo/" }  // Worldguard
 }
 
 group = project.property("group")
@@ -21,8 +22,11 @@ dependencies {
     // SPigot API
     implementation group: 'org.spigotmc', name: 'spigot-api', version: project.property("apiversion")
     // plugins
-    implementation group: 'org.screamingsandals.bedwars', name: 'BedWars-API', version: '0.2.8-SNAPSHOT'
-    implementation group: 'pl.plajer', name: 'villagedefense', version: '4.2.2' // newest version in Repo atm
+    implementation group: 'pl.plajer', name: 'villagedefense', version: '4.4.2'
+    implementation group: 'me.A5H73Y', name: 'Parkour', version: '5.3'
+
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4-SNAPSHOT'
+
     // annotation handling
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.10'

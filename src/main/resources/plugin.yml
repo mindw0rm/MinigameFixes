@@ -4,7 +4,8 @@ description: 'fix some issues with minigames'
 authors: [mindw0rm]
 website: https://github.com/mindw0rm/MinigameFixes
 api-version: 1.15
-depend: [BedWars]
+depend: [WorldGuard]
+softdepend: [VillageDefense,Parkour]
 main: net.kaoztribe.minigamefixes.MinigameFixes
 permissions:
   minigames.keepInventory:

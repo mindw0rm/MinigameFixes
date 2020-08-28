@@ -1,0 +1,7 @@
+# lobby coordinates taken from the region
+lobby:
+  minX: -525
+  maxX: -374
+  minZ: 519
+  maxZ: 970
+  world: 'Minigames'
