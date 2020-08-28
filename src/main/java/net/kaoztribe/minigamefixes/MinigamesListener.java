@@ -9,6 +9,7 @@ import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -84,7 +85,9 @@ public class MinigamesListener implements Listener {
 
   @EventHandler
   public void onExplosionPrime(ExplosionPrimeEvent e) {
-    if (MinigameFixes.getTntRadiusFlag() != null) { // else there has been some init error
+    // flag might be null if there was some init error
+    // onlyx use this for TNT!
+    if (MinigameFixes.getTntRadiusFlag() != null && e.getEntityType() == EntityType.PRIMED_TNT) {
       RegionContainer     container = WorldGuard.getInstance().getPlatform().getRegionContainer();
       RegionQuery         query = container.createQuery();
       ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(e.getEntity().getLocation()));

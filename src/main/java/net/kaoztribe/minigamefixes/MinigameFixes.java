@@ -66,7 +66,6 @@ public class MinigameFixes extends JavaPlugin {
 
     FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
     try {
-      // create a flag with the name "my-custom-flag", defaulting to true
       DoubleFlag flag = new DoubleFlag(TNT_RADIUS_FLAG_NAME);
       registry.register(flag);
       tntRadiusFlag = flag; // only set our field if there was no error
