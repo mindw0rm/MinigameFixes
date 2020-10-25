@@ -7,7 +7,7 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url 'https://maven.plajer.xyz/minecraft' } // Village Defense
+    maven { url 'https://maven.plajer.xyz/minecraft/' } // Village Defense
     maven { url 'https://dl.bintray.com/a5h73y/repo/' } // Parkour
     maven { url "https://maven.enginehub.org/repo/" }  // Worldguard
 }
@@ -22,7 +22,11 @@ dependencies {
     // SPigot API
     implementation group: 'org.spigotmc', name: 'spigot-api', version: project.property("apiversion")
     // plugins
-    implementation group: 'pl.plajer', name: 'villagedefense', version: '4.4.2'
+    // village defense > 4.4.2 not in the repo :(
+    // must be built locally!
+    implementation group: 'plugily.projects', name: 'villagedefense', version: '4.5.1'
+
+
     implementation group: 'me.A5H73Y', name: 'Parkour', version: '5.3'
 
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4-SNAPSHOT'

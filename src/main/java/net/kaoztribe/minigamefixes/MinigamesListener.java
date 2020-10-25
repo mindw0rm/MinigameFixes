@@ -1,7 +1,6 @@
 package net.kaoztribe.minigamefixes;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.math.Vector3;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
@@ -19,6 +18,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 public class MinigamesListener implements Listener {
 
@@ -54,8 +54,10 @@ public class MinigamesListener implements Listener {
    */
   @EventHandler
   public void onPlayerMove(PlayerMoveEvent e) {
-    if (e.getTo().getY() < 1 && e.getPlayer().getGameMode() == GameMode.SPECTATOR) {
-      e.getTo().setY(1);
+    Location to = e.getTo();
+
+    if (to != null && to.getY() < 1 && e.getPlayer().getGameMode() == GameMode.SPECTATOR) {
+      to.setY(1);
     }
   }
 
@@ -68,18 +70,19 @@ public class MinigamesListener implements Listener {
     if (e.getCause() == PlayerTeleportEvent.TeleportCause.SPECTATE)
       e.setCancelled(true);
     else {
-      Player player = e.getPlayer();
+      Player   player = e.getPlayer();
+      Location to     = e.getTo();
 
-      if (isInLobby(e.getTo()) && !isInLobby(e.getFrom()) && !player.hasPermission(keepInvPerm)) {
+      if (to != null && isInLobby(to) && !isInLobby(e.getFrom()) && !player.hasPermission(keepInvPerm)) {
         player.getInventory().clear();
       }
     }
   }
 
-  private boolean isInLobby(Location l) {
+  private boolean isInLobby(@NotNull Location l) {
     int x = l.getBlockX(), z = l.getBlockZ();
 
-    return l.getWorld().getName().equals(lobbyWorld)
+    return l.getWorld() != null && l.getWorld().getName().equals(lobbyWorld)
             && x >= lobbyMinX && x <= lobbyMaxX && z >= lobbyMinZ && z <= lobbyMaxZ;
   }
 

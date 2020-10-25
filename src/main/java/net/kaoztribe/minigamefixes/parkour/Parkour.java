@@ -1,13 +1,11 @@
 package net.kaoztribe.minigamefixes.parkour;
 
-import me.A5H73Y.Parkour.ParkourEvents.PlayerFinishCourseEvent;
-import me.A5H73Y.Parkour.ParkourEvents.PlayerLeaveCourseEvent;
 import net.kaoztribe.minigamefixes.MinigameFixes;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,11 +17,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+@SuppressWarnings("unused")
 public class Parkour implements Listener {
 
   private final Method isPlaying;
@@ -34,7 +32,8 @@ public class Parkour implements Listener {
      * but those are not found during runtime!
      * so circumvent this problem by dynamically loading the class
      */
-    Class pmClass = getClass().getClassLoader().loadClass("me.A5H73Y.parkour.player.PlayerMethods");
+    Class<?> pmClass = getClass().getClassLoader().loadClass("me.A5H73Y.parkour.player.PlayerMethods");
+
     isPlaying = pmClass.getMethod("isPlaying", String.class);
 
     Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
@@ -43,13 +42,14 @@ public class Parkour implements Listener {
   @EventHandler
   public void onInteract(PlayerInteractEvent e) throws InvocationTargetException, IllegalAccessException {
     Player p = e.getPlayer();
+    Block  b = e.getClickedBlock();
 
     // give blocks
     if (e.getAction() == Action.RIGHT_CLICK_BLOCK  // handle click on block
+            && b != null
             && e.getHand() == EquipmentSlot.HAND   // only main hand
             && inParkour(p)) { // and only if player is in Parkour course
-      switch (e.getClickedBlock().getType()) {
-        case ENCHANTING_TABLE:
+      if (b.getType() == Material.ENCHANTING_TABLE) {
           // put elytra in CHEST slot
           ItemStack elytra = new ItemStack(Material.ELYTRA);
 
